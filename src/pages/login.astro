@@ -96,14 +96,17 @@ import AuthLayout from '@/layouts/AuthLayout.astro';
 </AuthLayout>
 
 <script>
-  import { actions } from 'astro:actions';
   import Swal from 'sweetalert2';
 
-  const form = document.querySelector('form') as HTMLFormElement;
-  const btnSubmit = document.querySelector('#btn-submit') as HTMLButtonElement;
-  const bntGoogle = document.querySelector('#btn-google') as HTMLButtonElement;
 
   const { signIn } = await import('auth-astro/client');
+
+
+document.addEventListener('astro:page-load', () => {
+  const form = document.querySelector('form') as HTMLFormElement;
+  const btnSubmit = document.querySelector('#btn-submit') as HTMLButtonElement;
+
+  if ( !form || !btnSubmit ) return;
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -133,5 +136,6 @@ import AuthLayout from '@/layouts/AuthLayout.astro';
 
     // TODO:
     window.location.replace('/');
-  });
+  })
+} )
 </script>
