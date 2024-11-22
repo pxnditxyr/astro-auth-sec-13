@@ -1,4 +1,5 @@
-import { defineAction, z } from 'astro:actions';
+import { defineAction } from 'astro:actions';
+import { z } from 'astro:schema';
 
 export const registerUser = defineAction({
   accept: 'form',
@@ -7,7 +8,7 @@ export const registerUser = defineAction({
     email: z.string().email(),
     password: z.string().min(6),
   }),
-  handler: async ({ name, email, password }, { cookies }) => {
+  handler: async () => {
     return { ok: true };
   },
 });
